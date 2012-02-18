@@ -444,9 +444,9 @@ ENDMACRO(QT_QUERY_QMAKE)
 
 GET_FILENAME_COMPONENT(qt_install_version "[HKEY_CURRENT_USER\\Software\\trolltech\\Versions;DefaultQtVersion]" NAME)
 # check for qmake
-# Debian uses qmake-qt4
+# Debian uses qmake-qt5
 # macports' Qt uses qmake-mac
-FIND_PROGRAM(QT_QMAKE_EXECUTABLE NAMES qmake qmake4 qmake-qt4 qmake-mac PATHS
+FIND_PROGRAM(QT_QMAKE_EXECUTABLE NAMES qmake qmake4 qmake-qt5 qmake-mac PATHS
   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\4.0.0;InstallDir]/bin"
   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Versions\\4.0.0;InstallDir]/bin"
   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Versions\\${qt_install_version};InstallDir]/bin"
@@ -464,19 +464,19 @@ IF (QT_QMAKE_EXECUTABLE)
 
   SET(QT5_QMAKE_FOUND FALSE)
   
-  _qt4_query_qmake(QT_VERSION QTVERSION)
+  _qt5_query_qmake(QT_VERSION QTVERSION)
 
-  # check for qt3 qmake and then try and find qmake4 or qmake-qt4 in the path
+  # check for qt3 qmake and then try and find qmake4 or qmake-qt5 in the path
   IF(NOT QTVERSION)
     SET(QT_QMAKE_EXECUTABLE NOTFOUND CACHE FILEPATH "" FORCE)
-    FIND_PROGRAM(QT_QMAKE_EXECUTABLE NAMES qmake4 qmake-qt4 PATHS
+    FIND_PROGRAM(QT_QMAKE_EXECUTABLE NAMES qmake4 qmake-qt5 PATHS
       "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\4.0.0;InstallDir]/bin"
       "[HKEY_CURRENT_USER\\Software\\Trolltech\\Versions\\4.0.0;InstallDir]/bin"
       $ENV{QTDIR}/bin
       DOC "The qmake executable for the Qt installation to use"
       )
     IF(QT_QMAKE_EXECUTABLE)
-      _qt4_query_qmake(QT_VERSION QTVERSION)
+      _qt5_query_qmake(QT_VERSION QTVERSION)
     ENDIF(QT_QMAKE_EXECUTABLE)
   ENDIF(NOT QTVERSION)
 
@@ -510,9 +510,9 @@ IF (QT_QMAKE_EXECUTABLE)
       SET( req_qt_patch_vers ${Qt5_FIND_VERSION_PATCH} )
     ENDIF( Qt5_FIND_VERSION )
 
-    IF (NOT req_qt_major_vers EQUAL 4)
-      MESSAGE( FATAL_ERROR "Invalid Qt version string given: \"${QT_MIN_VERSION}\", major version 4 is required, e.g. \"4.0.1\"")
-    ENDIF (NOT req_qt_major_vers EQUAL 4)
+    IF (NOT req_qt_major_vers EQUAL 5)
+      MESSAGE( FATAL_ERROR "Invalid Qt version string given: \"${QT_MIN_VERSION}\", major version 4 is required, e.g. \"5.0.0\"")
+    ENDIF (NOT req_qt_major_vers EQUAL 5)
 
     # and now the version string given by qmake
     STRING(REGEX REPLACE "^([0-9]+)\\.[0-9]+\\.[0-9]+.*" "\\1" QT_VERSION_MAJOR "${QTVERSION}")
@@ -558,7 +558,7 @@ IF (QT5_QMAKE_FOUND)
   # ask qmake for the library dir
   # Set QT_LIBRARY_DIR
   IF (NOT QT_LIBRARY_DIR OR QT_QMAKE_CHANGED)
-    _qt4_query_qmake(QT_INSTALL_LIBS QT_LIBRARY_DIR_TMP)
+    _qt5_query_qmake(QT_INSTALL_LIBS QT_LIBRARY_DIR_TMP)
     IF(EXISTS "${QT_LIBRARY_DIR_TMP}")
       SET(QT_LIBRARY_DIR ${QT_LIBRARY_DIR_TMP} CACHE PATH "Qt library dir" FORCE)
     ELSE(EXISTS "${QT_LIBRARY_DIR_TMP}")
@@ -581,26 +581,26 @@ IF (QT5_QMAKE_FOUND)
   
   # ask qmake for the binary dir
   IF (QT_LIBRARY_DIR AND NOT QT_BINARY_DIR  OR  QT_QMAKE_CHANGED)
-      _qt4_query_qmake(QT_INSTALL_BINS qt_bins)
+      _qt5_query_qmake(QT_INSTALL_BINS qt_bins)
       SET(QT_BINARY_DIR ${qt_bins} CACHE INTERNAL "" FORCE)
   ENDIF (QT_LIBRARY_DIR AND NOT QT_BINARY_DIR  OR  QT_QMAKE_CHANGED)
 
   # ask qmake for the include dir
   IF (QT_LIBRARY_DIR AND NOT QT_HEADERS_DIR  OR  QT_QMAKE_CHANGED)
-      _qt4_query_qmake(QT_INSTALL_HEADERS qt_headers)
+      _qt5_query_qmake(QT_INSTALL_HEADERS qt_headers)
       SET(QT_HEADERS_DIR ${qt_headers} CACHE INTERNAL "" FORCE)
   ENDIF (QT_LIBRARY_DIR AND NOT QT_HEADERS_DIR  OR  QT_QMAKE_CHANGED)
 
 
   # ask qmake for the documentation directory
   IF (QT_LIBRARY_DIR AND NOT QT_DOC_DIR  OR  QT_QMAKE_CHANGED)
-    _qt4_query_qmake(QT_INSTALL_DOCS qt_doc_dir)
+    _qt5_query_qmake(QT_INSTALL_DOCS qt_doc_dir)
     SET(QT_DOC_DIR ${qt_doc_dir} CACHE PATH "The location of the Qt docs" FORCE)
   ENDIF (QT_LIBRARY_DIR AND NOT QT_DOC_DIR  OR  QT_QMAKE_CHANGED)
 
   # ask qmake for the mkspecs directory
   IF (QT_LIBRARY_DIR AND NOT QT_MKSPECS_DIR  OR  QT_QMAKE_CHANGED)
-    _qt4_query_qmake(QMAKE_MKSPECS qt_mkspecs_dirs)
+    _qt5_query_qmake(QMAKE_MKSPECS qt_mkspecs_dirs)
     # do not replace : on windows as it might be a drive letter
     # and windows should already use ; as a separator
     IF(UNIX)
@@ -614,19 +614,19 @@ IF (QT5_QMAKE_FOUND)
 
   # ask qmake for the plugins directory
   IF (QT_LIBRARY_DIR AND NOT QT_PLUGINS_DIR  OR  QT_QMAKE_CHANGED)
-    _qt4_query_qmake(QT_INSTALL_PLUGINS qt_plugins_dir)
+    _qt5_query_qmake(QT_INSTALL_PLUGINS qt_plugins_dir)
     SET(QT_PLUGINS_DIR ${qt_plugins_dir} CACHE PATH "The location of the Qt plugins" FORCE)
   ENDIF (QT_LIBRARY_DIR AND NOT QT_PLUGINS_DIR  OR  QT_QMAKE_CHANGED)
 
   # ask qmake for the translations directory
   IF (QT_LIBRARY_DIR AND NOT QT_TRANSLATIONS_DIR  OR  QT_QMAKE_CHANGED)
-    _qt4_query_qmake(QT_INSTALL_TRANSLATIONS qt_translations_dir)
+    _qt5_query_qmake(QT_INSTALL_TRANSLATIONS qt_translations_dir)
     SET(QT_TRANSLATIONS_DIR ${qt_translations_dir} CACHE PATH "The location of the Qt translations" FORCE)
   ENDIF (QT_LIBRARY_DIR AND NOT QT_TRANSLATIONS_DIR  OR  QT_QMAKE_CHANGED)
 
   # ask qmake for the imports directory
   IF (QT_LIBRARY_DIR AND NOT QT_IMPORTS_DIR OR QT_QMAKE_CHANGED)
-    _qt4_query_qmake(QT_INSTALL_IMPORTS qt_imports_dir)
+    _qt5_query_qmake(QT_INSTALL_IMPORTS qt_imports_dir)
     if(qt_imports_dir)
       SET(QT_IMPORTS_DIR NOTFOUND)
       foreach(qt_cross_path ${CMAKE_FIND_ROOT_PATH})
@@ -803,8 +803,8 @@ IF (QT5_QMAKE_FOUND)
     IF (QT_USE_FRAMEWORKS)
       SET(QT_INCLUDE_DIR ${QT_HEADERS_DIR})
     ELSE (QT_USE_FRAMEWORKS)
-      STRING( REGEX REPLACE "/QtCore$" "" qt4_include_dir ${QT_QTCORE_INCLUDE_DIR})
-      SET( QT_INCLUDE_DIR ${qt4_include_dir} CACHE PATH "")
+      STRING( REGEX REPLACE "/QtCore$" "" qt5_include_dir ${QT_QTCORE_INCLUDE_DIR})
+      SET( QT_INCLUDE_DIR ${qt5_include_dir} CACHE PATH "")
     ENDIF (QT_USE_FRAMEWORKS)
   ENDIF( QT_QTCORE_INCLUDE_DIR AND NOT QT_INCLUDE_DIR)
 
@@ -1073,13 +1073,13 @@ IF (QT5_QMAKE_FOUND)
   ENDIF(QT_QMAKE_CHANGED)
   
   FIND_PROGRAM(QT_MOC_EXECUTABLE
-    NAMES moc-qt4 moc
+    NAMES moc-qt5 moc
     PATHS ${QT_BINARY_DIR}
     NO_DEFAULT_PATH
     )
 
   FIND_PROGRAM(QT_UIC_EXECUTABLE
-    NAMES uic-qt4 uic
+    NAMES uic-qt5 uic
     PATHS ${QT_BINARY_DIR}
     NO_DEFAULT_PATH
     )
@@ -1123,31 +1123,31 @@ else(NOT WINCE)
 endif(NOT WINCE)
 
   FIND_PROGRAM(QT_LUPDATE_EXECUTABLE
-    NAMES lupdate-qt4 lupdate
+    NAMES lupdate-qt5 lupdate
     PATHS ${QT_BINARY_DIR}
     NO_DEFAULT_PATH
     )
 
   FIND_PROGRAM(QT_LRELEASE_EXECUTABLE
-    NAMES lrelease-qt4 lrelease
+    NAMES lrelease-qt5 lrelease
     PATHS ${QT_BINARY_DIR}
     NO_DEFAULT_PATH
     )
 
   FIND_PROGRAM(QT_QCOLLECTIONGENERATOR_EXECUTABLE
-    NAMES qcollectiongenerator-qt4 qcollectiongenerator
+    NAMES qcollectiongenerator-qt5 qcollectiongenerator
     PATHS ${QT_BINARY_DIR}
     NO_DEFAULT_PATH
     )
 
   FIND_PROGRAM(QT_DESIGNER_EXECUTABLE
-    NAMES designer-qt4 designer
+    NAMES designer-qt5 designer
     PATHS ${QT_BINARY_DIR}
     NO_DEFAULT_PATH
     )
 
   FIND_PROGRAM(QT_LINGUIST_EXECUTABLE
-    NAMES linguist-qt4 linguist
+    NAMES linguist-qt5 linguist
     PATHS ${QT_BINARY_DIR}
     NO_DEFAULT_PATH
     )
@@ -1169,7 +1169,7 @@ endif(NOT WINCE)
 
 
   # get the directory of the current file, used later on in the file
-  GET_FILENAME_COMPONENT( _qt4_current_dir  "${CMAKE_CURRENT_LIST_FILE}" PATH)
+  GET_FILENAME_COMPONENT( _qt5_current_dir  "${CMAKE_CURRENT_LIST_FILE}" PATH)
 
   ######################################
   #
@@ -1177,7 +1177,7 @@ endif(NOT WINCE)
   #
   ######################################
 
-  INCLUDE("${_qt4_current_dir}/Qt5Macros.cmake")
+  INCLUDE("${_qt5_current_dir}/Qt5Macros.cmake")
 
 
   ######################################
@@ -1227,7 +1227,7 @@ endif(NOT WINCE)
   #
   ###############################################
 
-  INCLUDE("${_qt4_current_dir}/Qt5ConfigDependentSettings.cmake")
+  INCLUDE("${_qt5_current_dir}/Qt5ConfigDependentSettings.cmake")
 
 
   #######################################

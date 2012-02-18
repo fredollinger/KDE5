@@ -5,9 +5,9 @@
 #  KDE5_FOUND               - set to TRUE if everything required for building KDE software has been found
 #
 #  KDE5_DEFINITIONS         - compiler definitions required for compiling KDE software
-#  KDE5_INCLUDE_DIR         - the KDE 4 include directory
+#  KDE5_INCLUDE_DIR         - the KDE 5 include directory
 #  KDE5_INCLUDES            - all include directories required for KDE, i.e.
-#                             KDE5_INCLUDE_DIR, but also the Qt4 include directories
+#                             KDE5_INCLUDE_DIR, but also the Qt5 include directories
 #                             and other platform specific include directories
 #  KDE5_LIB_DIR             - the directory where the KDE libraries are installed,
 #                             intended to be used with LINK_DIRECTORIES(). In general, this is not necessary.
@@ -396,7 +396,7 @@ endif(KDE5_FIND_REQUIRED  OR  KDE5Internal_FIND_REQUIRED)
 
 
 # Store CMAKE_MODULE_PATH and then append the current dir to it, so we are sure
-# we get the FindQt4.cmake located next to us and not a different one.
+# we get the FindQt5.cmake located next to us and not a different one.
 # The original CMAKE_MODULE_PATH is restored later on.
 set(_kde_cmake_module_path_back ${CMAKE_MODULE_PATH})
 set(CMAKE_MODULE_PATH ${kde_cmake_module_dir} ${CMAKE_MODULE_PATH} )
@@ -404,20 +404,20 @@ set(CMAKE_MODULE_PATH ${kde_cmake_module_dir} ${CMAKE_MODULE_PATH} )
 # if the minimum Qt requirement is changed, change all occurrence in the
 # following lines
 if( NOT QT_MIN_VERSION )
-  set(QT_MIN_VERSION "4.5.0")
+  set(QT_MIN_VERSION "5.0.0")
 endif( NOT QT_MIN_VERSION )
-if( ${QT_MIN_VERSION} VERSION_LESS "4.5.0" )
-  set(QT_MIN_VERSION "4.5.0")
-endif( ${QT_MIN_VERSION} VERSION_LESS "4.5.0" )
+if( ${QT_MIN_VERSION} VERSION_LESS "5.0.0" )
+  set(QT_MIN_VERSION "5.0.0")
+endif( ${QT_MIN_VERSION} VERSION_LESS "5.0.0" )
 
-# Tell FindQt4.cmake to point the QT_QTFOO_LIBRARY targets at the imported targets
+# Tell FindQt5.cmake to point the QT_QTFOO_LIBRARY targets at the imported targets
 # for the Qt libraries, so we get full handling of release and debug versions of the
 # Qt libs and are flexible regarding the install location of Qt under Windows:
 set(QT_USE_IMPORTED_TARGETS TRUE)
 
-#this line includes FindQt4.cmake, which searches the Qt library and headers
+#this line includes FindQt5.cmake, which searches the Qt library and headers
 # TODO: we should check here that all necessary modules of Qt have been found, e.g. QtDBus
-find_package(Qt4 ${_REQ_STRING_KDE5})
+find_package(Qt5 ${_REQ_STRING_KDE5})
 
 # automoc4 (from kdesupport) is now required, Alex
 find_package(Automoc4 ${_REQ_STRING_KDE5})
@@ -431,7 +431,7 @@ set(_automoc4_min_version "0.9.88")
 macro_ensure_version("${_automoc4_min_version}" "${AUTOMOC4_VERSION}" _automoc4_version_ok)
 
 # for compatibility with KDE 4.0.x
-set(KDE5_AUTOMOC_EXECUTABLE        "${AUTOMOC4_EXECUTABLE}" )
+#set(KDE5_AUTOMOC_EXECUTABLE        "${AUTOMOC4_EXECUTABLE}" )
 
 # Perl is not required for building KDE software, but we had that here since 4.0
 find_package(Perl)
@@ -455,10 +455,10 @@ set(CMAKE_MODULE_PATH ${_kde_cmake_module_path_back})
 # then we get here and must check that everything has actually been found. If something is missing,
 # we must not fail with FATAL_ERROR, but only not set KDE5_FOUND.
 
-if(NOT QT4_FOUND)
-   message(STATUS "KDE5 not found, because Qt4 was not found")
+if(NOT QT5_FOUND)
+   message(STATUS "KDE5 not found, because Qt5 was not found")
    return()
-endif(NOT QT4_FOUND)
+endif(NOT QT5_FOUND)
 
 if(NOT AUTOMOC4_FOUND OR NOT _automoc4_version_ok)
    if(NOT AUTOMOC4_FOUND)
@@ -1051,7 +1051,7 @@ endif (UNIX)
 
 
 if (Q_WS_X11)
-   # Done by FindQt4.cmake already
+   # Done by FindQt5.cmake already
    #find_package(X11 REQUIRED)
    # UNIX has already set _KDE5_PLATFORM_INCLUDE_DIRS, so append
    set(_KDE5_PLATFORM_INCLUDE_DIRS ${_KDE5_PLATFORM_INCLUDE_DIRS} ${X11_INCLUDE_DIR} )
