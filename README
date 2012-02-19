@@ -1,0 +1,7 @@
+Sat Feb 18 14:40:39 PST 2012
+
+The main idea, so far, is to fork kde4.7.2 into kde5.
+
+For now, I'm keeping the dir name kdelibs-4.7.2 because we are going to patch against the old tree. Later on, when the fork takes hold, we'll change it to kde-5.0.0.
+
+
