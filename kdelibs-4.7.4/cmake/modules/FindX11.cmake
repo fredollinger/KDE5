@@ -56,6 +56,7 @@ IF (UNIX)
     /usr/openwin/include 
     /usr/openwin/share/include 
     /opt/graphics/OpenGL/include
+    /host/kde5/include
   )
 
   SET(X11_LIB_SEARCH_PATH
@@ -65,6 +66,7 @@ IF (UNIX)
     /usr/openwin/lib 
     /usr/lib/X11
     /usr/lib/x86_64-linux-gnu
+    /host/kde5/lib
   )
 
   FIND_PATH(X11_X11_INCLUDE_PATH X11/X.h                             ${X11_INC_SEARCH_PATH})
