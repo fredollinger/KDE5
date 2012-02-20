@@ -45,7 +45,7 @@ configure_file(auth/BackendsConfig.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/BackendsC
 # Configure checks for localization
 configure_file(localization/config-localization.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-localization.h)
 
-include_directories( ${KDE4_KDECORE_INCLUDES} )
+include_directories( ${KDE5_KDECORE_INCLUDES} )
 include_directories( ${ZLIB_INCLUDE_DIR} )
 include_directories( ${QT_INCLUDES} )
 
@@ -69,9 +69,9 @@ if(WIN32)
 endif(WIN32)
 
 # Needed for the kdatetime test in release mode
-if(KDE4_BUILD_TESTS)
+if(KDE5_BUILD_TESTS)
    add_definitions(-DCOMPILING_TESTS)
-endif(KDE4_BUILD_TESTS)
+endif(KDE5_BUILD_TESTS)
 
 # compile bzip2 support if available
 if(BZIP2_FOUND)
@@ -439,7 +439,7 @@ install(TARGETS kdecore EXPORT kdelibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_A
 
 # Compile only if fake backend has not been selected
 
-if (NOT "${KDE4_AUTH_BACKEND_NAME}" STREQUAL "FAKE")
+if (NOT "${KDE5_AUTH_BACKEND_NAME}" STREQUAL "FAKE")
     # KAUTH_POLICY_GEN_SRCS has been generated from auth/ConfigureChecks.cmake
     kde5_add_executable(kauth-policy-gen NOGUI ${KAUTH_POLICY_GEN_SRCS})
 
@@ -447,14 +447,14 @@ if (NOT "${KDE4_AUTH_BACKEND_NAME}" STREQUAL "FAKE")
     target_link_libraries( kauth-policy-gen ${KAUTH_POLICY_GEN_LIBRARIES} )
 
     install( TARGETS kauth-policy-gen EXPORT kdelibsToolsTargets DESTINATION ${LIBEXEC_INSTALL_DIR})
-endif (NOT "${KDE4_AUTH_BACKEND_NAME}" STREQUAL "FAKE")
+endif (NOT "${KDE5_AUTH_BACKEND_NAME}" STREQUAL "FAKE")
 
 if ( NOT WINCE )
     ########### next target ###############
 
     # KAuth backend plugin
 
-    if (NOT "${KDE4_AUTH_BACKEND_NAME}" STREQUAL "FAKE")
+    if (NOT "${KDE5_AUTH_BACKEND_NAME}" STREQUAL "FAKE")
         set(KAUTH_BACKEND_SRCS ${KAUTH_BACKEND_SRCS} auth/AuthBackend.cpp)
         kde5_add_plugin(kauth_backend_plugin ${KAUTH_BACKEND_SRCS})
         target_link_libraries(kauth_backend_plugin ${KAUTH_BACKEND_LIBS})
@@ -463,13 +463,13 @@ if ( NOT WINCE )
                 ARCHIVE DESTINATION ${KAUTH_BACKEND_PLUGIN_DIR}
                 RUNTIME DESTINATION ${KAUTH_BACKEND_PLUGIN_DIR}
         )
-    endif (NOT "${KDE4_AUTH_BACKEND_NAME}" STREQUAL "FAKE")
+    endif (NOT "${KDE5_AUTH_BACKEND_NAME}" STREQUAL "FAKE")
 
     ########### next target ###############
 
     # KAuth helper plugin
 
-    if (NOT "${KDE4_AUTH_HELPER_BACKEND_NAME}" STREQUAL "FAKE")
+    if (NOT "${KDE5_AUTH_HELPER_BACKEND_NAME}" STREQUAL "FAKE")
         kde5_add_plugin(kauth_helper_plugin ${KAUTH_HELPER_BACKEND_SRCS} auth/HelperProxy.cpp)
         target_link_libraries(kauth_helper_plugin ${KAUTH_HELPER_BACKEND_LIBS})
         install(TARGETS kauth_helper_plugin
@@ -477,7 +477,7 @@ if ( NOT WINCE )
                 ARCHIVE DESTINATION ${KAUTH_HELPER_PLUGIN_DIR}
                 RUNTIME DESTINATION ${KAUTH_HELPER_PLUGIN_DIR}
         )
-    endif (NOT "${KDE4_AUTH_HELPER_BACKEND_NAME}" STREQUAL "FAKE")
+    endif (NOT "${KDE5_AUTH_HELPER_BACKEND_NAME}" STREQUAL "FAKE")
 endif ( NOT WINCE )
 
 ########### next target ###############
@@ -486,7 +486,7 @@ configure_file(localization/all_languages.desktop ${CMAKE_CURRENT_BINARY_DIR}/al
 
 kde5_add_executable(kde5-config NOGUI kde-config.cpp )
 
-target_link_libraries(kde5-config ${KDE4_KDECORE_LIBS})
+target_link_libraries(kde5-config ${KDE5_KDECORE_LIBS})
 
 install(TARGETS kde5-config ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
@@ -516,11 +516,11 @@ if(NOT WINCE)
     target_link_libraries( ktranscript kjs ${QT_QTCORE_LIBRARY} )
 
 
-    if(KDE4_ENABLE_FINAL)
+    if(KDE5_ENABLE_FINAL)
        macro_add_file_dependencies(${CMAKE_CURRENT_BINARY_DIR}/ktranscript_final_cpp.cpp ${CMAKE_CURRENT_BINARY_DIR}/ktranscript.lut.h)
-    else(KDE4_ENABLE_FINAL)
+    else(KDE5_ENABLE_FINAL)
        macro_add_file_dependencies(${CMAKE_CURRENT_SOURCE_DIR}/localization/ktranscript.cpp ${CMAKE_CURRENT_BINARY_DIR}/ktranscript.lut.h)
-    endif(KDE4_ENABLE_FINAL)
+    endif(KDE5_ENABLE_FINAL)
 
     install( TARGETS ktranscript DESTINATION ${PLUGIN_INSTALL_DIR} )
 

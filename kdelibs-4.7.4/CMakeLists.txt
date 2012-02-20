@@ -22,7 +22,7 @@ if (WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif (WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Debug")
 set (KDE_DEFAULT_HOME ".kde${_KDE_DEFAULT_HOME_POSTFIX}" CACHE STRING "The default KDE home directory" )
 
-# this must be before FindKDE4Internal in order to preset the result of the visibility test, so that it will be skipped
+# this must be before FindKDE5Internal in order to preset the result of the visibility test, so that it will be skipped
 option(KHTML_BUILD_TESTREGRESSION "Build KHTML's testregression. Note: this disables hidden visibility")
 # Disable visibility if testregression is built, because the symbols are needed then
 if (KHTML_BUILD_TESTREGRESSION)
@@ -49,7 +49,7 @@ configure_file(${CMAKE_SOURCE_DIR}/CTestCustom.cmake ${CMAKE_BINARY_DIR}/CTestCu
 set (QT_MIN_VERSION "5.0.0")
 
 find_package(KDE5Internal REQUIRED)
-include(KDE4Defaults)
+include(KDE5Defaults)
 include (MacroLibrary)
 if (APPLE)
    find_package(Carbon REQUIRED)
@@ -57,7 +57,7 @@ endif (APPLE)
 
 if(UNIX AND Q_WS_X11)
   #X11 Session Management (SM) is required
-  #X11_SM_FOUND is set in FindX11, which is required by KDE4Internal
+  #X11_SM_FOUND is set in FindX11, which is required by KDE5Internal
   if(NOT X11_SM_FOUND)
     message(FATAL_ERROR "\nThe X11 Session Management (SM) development package could not be found.\nPlease install libSM.\n")
   endif(NOT X11_SM_FOUND)
@@ -135,7 +135,7 @@ if(${generatedFileInSourceDir})
 endif(${generatedFileInSourceDir})
 #########################################################################
 
-add_definitions(${QT_DEFINITIONS} ${KDE4_DEFINITIONS})
+add_definitions(${QT_DEFINITIONS} ${KDE5_DEFINITIONS})
 remove_definitions(-DQT3_SUPPORT_WARNINGS -DQT3_SUPPORT)
 
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
@@ -154,17 +154,17 @@ endif(QCA2_FOUND)
 
 # Those variables for  are only valid inside of kdelibs, of course.
 # Use the one variable for the lib you depend upon.
-# E.g. kdeui uses ${KDE4_KDECORE_INCLUDES}. Something that depends on kparts uses ${KDE4_KPARTS_INCLUDES}.
+# E.g. kdeui uses ${KDE5_KDECORE_INCLUDES}. Something that depends on kparts uses ${KDE5_KPARTS_INCLUDES}.
 
-set(KDE4_KJS_INCLUDES ${CMAKE_SOURCE_DIR}/kjs
+set(KDE5_KJS_INCLUDES ${CMAKE_SOURCE_DIR}/kjs
                       ${CMAKE_BINARY_DIR}/kjs)
 
 if(NOT WINCE)
-    set(KDE4_KDECORE_INCLUDES ${KDE4_KJS_INCLUDES} )
+    set(KDE5_KDECORE_INCLUDES ${KDE5_KJS_INCLUDES} )
 endif(NOT WINCE)
 
 # kdecore depends on Qt (need only headers from kjs)
-set(KDE4_KDECORE_INCLUDES ${KDE4_KDECORE_INCLUDES}
+set(KDE5_KDECORE_INCLUDES ${KDE5_KDECORE_INCLUDES}
                           ${CMAKE_SOURCE_DIR}/kdecore
                           ${CMAKE_BINARY_DIR}/kdecore
                           ${CMAKE_SOURCE_DIR}/kdecore/compression
@@ -182,9 +182,9 @@ set(KDE4_KDECORE_INCLUDES ${KDE4_KDECORE_INCLUDES}
                           ${CMAKE_SOURCE_DIR}/kdecore/util
                           ${CMAKE_SOURCE_DIR}/kdecore/sonnet
                           ${QT_INCLUDES}
-                          ${_KDE4_PLATFORM_INCLUDE_DIRS})
+                          ${_KDE5_PLATFORM_INCLUDE_DIRS})
 # kdeui depends on kdecore
-set(KDE4_KDEUI_INCLUDES ${CMAKE_SOURCE_DIR}/kdeui
+set(KDE5_KDEUI_INCLUDES ${CMAKE_SOURCE_DIR}/kdeui
                         ${CMAKE_SOURCE_DIR}/kdeui/actions
                         ${CMAKE_SOURCE_DIR}/kdeui/colors
                         ${CMAKE_SOURCE_DIR}/kdeui/config
@@ -204,31 +204,31 @@ set(KDE4_KDEUI_INCLUDES ${CMAKE_SOURCE_DIR}/kdeui
                         ${CMAKE_SOURCE_DIR}/kdeui/widgets
                         ${CMAKE_SOURCE_DIR}/kdeui/windowmanagement
                         ${CMAKE_SOURCE_DIR}/kdeui/xmlgui
-                        ${KDE4_KDECORE_INCLUDES})
+                        ${KDE5_KDECORE_INCLUDES})
 
 # kio depends on kdeui
-set(KDE4_KIO_INCLUDES ${CMAKE_SOURCE_DIR}/kio
+set(KDE5_KIO_INCLUDES ${CMAKE_SOURCE_DIR}/kio
                       ${CMAKE_SOURCE_DIR}/kio/bookmarks
                       ${CMAKE_SOURCE_DIR}/kio/kio
                       ${CMAKE_SOURCE_DIR}/kio/kfile
-                      ${KDE4_KDEUI_INCLUDES})
+                      ${KDE5_KDEUI_INCLUDES})
 
 # kpty
-set(KDE4_KPTY_INCLUDES ${CMAKE_SOURCE_DIR}/kpty ${KDE4_KIO_INCLUDES} )
+set(KDE5_KPTY_INCLUDES ${CMAKE_SOURCE_DIR}/kpty ${KDE5_KIO_INCLUDES} )
 
 # kparts depends on kio
-set(KDE4_KPARTS_INCLUDES ${CMAKE_SOURCE_DIR}/kparts
-                         ${KDE4_KIO_INCLUDES})
+set(KDE5_KPARTS_INCLUDES ${CMAKE_SOURCE_DIR}/kparts
+                         ${KDE5_KIO_INCLUDES})
 
 # kde3support depends on kparts
-set(KDE4_KDE3SUPPORT_INCLUDES ${CMAKE_SOURCE_DIR}/kde3support
+set(KDE5_KDE3SUPPORT_INCLUDES ${CMAKE_SOURCE_DIR}/kde3support
                               ${CMAKE_SOURCE_DIR}/kde3support/kdecore
                               ${CMAKE_SOURCE_DIR}/kde3support/kdeui
                               ${CMAKE_SOURCE_DIR}/kde3support/kio
-                              ${KDE4_KPARTS_INCLUDES})
+                              ${KDE5_KPARTS_INCLUDES})
 
 if(NOT WINCE)
- set(KDE4_KHTML_INCLUDES ${CMAKE_SOURCE_DIR}/khtml)
+ set(KDE5_KHTML_INCLUDES ${CMAKE_SOURCE_DIR}/khtml)
 endif(NOT WINCE)
 
 
@@ -335,7 +335,7 @@ macro_optional_add_subdirectory( doc  )
 ################# write dependency file which will be installed #################
 
 # Used in configure_file() and install(EXPORT)
-set(KDE4_TARGET_PREFIX KDE4__)
+set(KDE5_TARGET_PREFIX KDE5__)
 include(CreateKDELibsDependenciesFile.cmake)
 
 ################# install files #################
@@ -355,9 +355,9 @@ install( FILES ${CMAKE_CURRENT_BINARY_DIR}/KDEPlatformProfile.cmake  DESTINATION
 install(CODE "set(EXPORT_FILES KDELibs4LibraryTargets.cmake KDELibs4ToolsTargets.cmake)"
         CODE "set(EXPORT_INSTALL_DIR \"${DATA_INSTALL_DIR}/cmake/modules\")"
         SCRIPT "${CMAKE_SOURCE_DIR}/cmake/modules/check_installed_exports_file.cmake" )
-install( EXPORT kdelibsLibraryTargets DESTINATION ${DATA_INSTALL_DIR}/cmake/modules NAMESPACE ${KDE4_TARGET_PREFIX} FILE KDELibs4LibraryTargets.cmake )
-install( EXPORT kdelibsToolsTargets   DESTINATION ${DATA_INSTALL_DIR}/cmake/modules NAMESPACE ${KDE4_TARGET_PREFIX} FILE KDELibs4ToolsTargets.cmake )
+install( EXPORT kdelibsLibraryTargets DESTINATION ${DATA_INSTALL_DIR}/cmake/modules NAMESPACE ${KDE5_TARGET_PREFIX} FILE KDELibs4LibraryTargets.cmake )
+install( EXPORT kdelibsToolsTargets   DESTINATION ${DATA_INSTALL_DIR}/cmake/modules NAMESPACE ${KDE5_TARGET_PREFIX} FILE KDELibs4ToolsTargets.cmake )
 # the following will be the correct locations once cmake has the improved FIND_PACKAGE()
-# install( FILES ${CMAKE_CURRENT_BINARY_DIR}/KDELibsDependencies.cmake DESTINATION ${PLUGIN_INSTALL_DIR}/cmake RENAME KDE4Config.cmake)
+# install( FILES ${CMAKE_CURRENT_BINARY_DIR}/KDELibsDependencies.cmake DESTINATION ${PLUGIN_INSTALL_DIR}/cmake RENAME KDE5Config.cmake)
 
 macro_display_feature_log()

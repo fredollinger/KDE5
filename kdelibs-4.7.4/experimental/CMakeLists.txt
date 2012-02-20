@@ -8,12 +8,12 @@ if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
 
 if(BUILDING_EXPERIMENTAL_SEPARATELY)
-   find_package(KDE4 4.2.85 REQUIRED)
+   find_package(KDE5 4.2.85 REQUIRED)
    include(MacroLibrary)
-   include(KDE4Defaults)
+   include(KDE5Defaults)
 else(BUILDING_EXPERIMENTAL_SEPARATELY)
    include_directories(${CMAKE_CURRENT_SOURCE_DIR}
-                       ${KDE4_KDEUI_INCLUDES})
+                       ${KDE5_KDEUI_INCLUDES})
 endif(BUILDING_EXPERIMENTAL_SEPARATELY)
 
 

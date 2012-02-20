@@ -10,7 +10,7 @@ include_directories(
  ${CMAKE_SOURCE_DIR}/interfaces/kregexpeditor
  ${CMAKE_SOURCE_DIR}/kdecore/sonnet
  ${CMAKE_SOURCE_DIR}/kdeui
- ${KDE4_KDECORE_INCLUDES}
+ ${KDE5_KDECORE_INCLUDES}
  ${CMAKE_CURRENT_SOURCE_DIR}/actions
  ${CMAKE_CURRENT_SOURCE_DIR}/colors
  ${CMAKE_CURRENT_SOURCE_DIR}/config
@@ -425,7 +425,7 @@ qt5_add_dbus_interface(kdeui_LIB_SRCS ${knotify_xml} knotify_interface)
 
 kde5_add_library(kdeui ${LIBRARY_TYPE} ${kdeui_LIB_SRCS})
 
-target_link_libraries(kdeui ${KDE4_KDECORE_LIBS} ${X11_LIBRARIES} ${QT_QTGUI_LIBRARY}
+target_link_libraries(kdeui ${KDE5_KDECORE_LIBS} ${X11_LIBRARIES} ${QT_QTGUI_LIBRARY}
                             ${QT_QTXML_LIBRARY} ${KDEUI_EXTRA_LIBS} ${QT_QTNETWORK_LIBRARY})
 
 if(NOT WINCE)

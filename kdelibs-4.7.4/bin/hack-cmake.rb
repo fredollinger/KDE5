@@ -17,7 +17,12 @@ def fixCMakeFiles(st)
 	fr = File.open("#{st}.bak", "r") 
 	fw = File.open("#{st}", "w") 
 	fr.each{ |line|
-		puts line
+		newline = line.gsub("kde4", "kde5")
+		newline = newline.gsub("KDE4", "KDE5")
+		newline = newline.gsub("QT4", "QT5")
+		newline = newline.gsub("qt4", "qt5")
+		puts newline
+		fw.write(newline)
 	}
 	fw.close()
 	fr.close()

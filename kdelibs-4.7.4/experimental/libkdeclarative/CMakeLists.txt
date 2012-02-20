@@ -9,12 +9,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config-kdeclarative.h.cmake ${CMAKE_C
 include_directories(
    ${CMAKE_SOURCE_DIR}
    ${CMAKE_BINARY_DIR}
-   ${KDE4_KIO_INCLUDES}
+   ${KDE5_KIO_INCLUDES}
    ${CMAKE_SOURCE_DIR}/kio
    )
 
 if(BUILDING_EXPERIMENTAL_SEPARATELY)
-   include_directories(${KDE4_INCLUDES})
+   include_directories(${KDE5_INCLUDES})
 endif()
 
 set(kdeclarative_LIB_SRCS
@@ -26,20 +26,20 @@ set(kdeclarative_LIB_SRCS
     bindings/icon.cpp
     bindings/url.cpp)
 
-kde4_add_library(kdeclarative SHARED ${kdeclarative_LIB_SRCS})
+kde5_add_library(kdeclarative SHARED ${kdeclarative_LIB_SRCS})
 
 set_target_properties(kdeclarative PROPERTIES VERSION ${KDE_NON_GENERIC_LIB_VERSION} SOVERSION ${KDE_NON_GENERIC_LIB_SOVERSION})
 
-target_link_libraries(kdeclarative ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY})
+target_link_libraries(kdeclarative ${KDE5_KDECORE_LIBS} ${KDE5_KDEUI_LIBS} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY})
 
 
 ## test
 set(kdeclarative_TEST_SRCS
     test/test.cpp)
 
-kde4_add_executable(kdeclarativetest ${kdeclarative_TEST_SRCS})
+kde5_add_executable(kdeclarativetest ${kdeclarative_TEST_SRCS})
 
-target_link_libraries(kdeclarativetest kdeclarative ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY})
+target_link_libraries(kdeclarativetest kdeclarative ${KDE5_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY})
 
 ## install
 

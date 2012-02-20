@@ -20,7 +20,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/query
   ${CMAKE_CURRENT_SOURCE_DIR}/utils
   ${CMAKE_SOURCE_DIR}
-  ${KDE4_KIO_INCLUDES}
+  ${KDE5_KIO_INCLUDES}
   ${QT_INCLUDES}
   ${SOPRANO_INCLUDE_DIR}
 )
@@ -120,7 +120,7 @@ soprano_add_ontology(nepomuk_LIB_SRCS "${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/pimo/
 soprano_add_ontology(nepomuk_LIB_SRCS "${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/nuao.trig" "NUAO" "Nepomuk::Vocabulary" "trig" VISIBILITY "nepomuk")
 soprano_add_ontology(nepomuk_LIB_SRCS "${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/ndo.trig" "NDO" "Nepomuk::Vocabulary" "trig" VISIBILITY "nepomuk")
 
-kde4_add_library(nepomuk ${LIBRARY_TYPE} ${nepomuk_LIB_SRCS})
+kde5_add_library(nepomuk ${LIBRARY_TYPE} ${nepomuk_LIB_SRCS})
 
 target_link_libraries(nepomuk
   ${SOPRANO_LIBRARIES}

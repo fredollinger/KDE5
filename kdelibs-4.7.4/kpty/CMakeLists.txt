@@ -1,6 +1,6 @@
 project(kpty)
 
-include_directories( ${KDE4_KDECORE_INCLUDES} )
+include_directories( ${KDE5_KDECORE_INCLUDES} )
 include_directories( ${QT_INCLUDES} )
 
 set(kpty_LIB_SRCS
@@ -11,7 +11,7 @@ set(kpty_LIB_SRCS
 
 kde5_add_library(kpty ${LIBRARY_TYPE} ${kpty_LIB_SRCS})
 
-target_link_libraries(kpty ${KDE4_KDECORE_LIBS} ${UTIL_LIBRARY} ${UTEMPTER_LIBRARY})
+target_link_libraries(kpty ${KDE5_KDECORE_LIBS} ${UTIL_LIBRARY} ${UTEMPTER_LIBRARY})
 target_link_libraries(kpty LINK_INTERFACE_LIBRARIES kdecore ${QT_QTCORE_LIBRARY} )
 
 set_target_properties(kpty PROPERTIES

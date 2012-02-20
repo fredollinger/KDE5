@@ -3,8 +3,8 @@ project(kactivities)
 include_directories(
    ${CMAKE_SOURCE_DIR}
    ${CMAKE_BINARY_DIR}
-   ${KDE4_INCLUDES}
-   ${KDE4_KIO_INCLUDES}
+   ${KDE5_INCLUDES}
+   ${KDE5_KIO_INCLUDES}
    )
 
 set(
@@ -16,7 +16,7 @@ set(
    kactivitymanager_p.cpp
    )
 
-qt4_add_dbus_interface(
+qt5_add_dbus_interface(
    kactivities_LIB_SRCS
 
    org.kde.ActivityManager.xml
@@ -24,7 +24,7 @@ qt4_add_dbus_interface(
 )
 
 
-kde4_add_library(
+kde5_add_library(
    kactivities SHARED
    ${kactivities_LIB_SRCS}
    )
@@ -38,7 +38,7 @@ set_target_properties(
 
 target_link_libraries(
    kactivities
-   ${KDE4_KDECORE_LIBS}
+   ${KDE5_KDECORE_LIBS}
    )
 
 ## install

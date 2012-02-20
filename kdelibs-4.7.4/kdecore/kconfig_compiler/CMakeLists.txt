@@ -3,7 +3,7 @@
 # if (CMAKE_CROSSCOMPILING)
 #    set(IMPORT_KCONFIG_COMPILER_EXECUTABLE "${KDE_HOST_TOOLS_PATH}/ImportKConfigCompilerExecutable.cmake" CACHE FILEPATH "Point it to the export file of kconfig_compiler from a native build")
 #    include(${IMPORT_KCONFIG_COMPILER_EXECUTABLE})
-#    set(KDE4_KCFGC_EXECUTABLE kconfig_compiler)
+#    set(KDE5_KCFGC_EXECUTABLE kconfig_compiler)
 # else (CMAKE_CROSSCOMPILING)
 
 
@@ -15,7 +15,7 @@
    target_link_libraries(kconfig_compiler  ${QT_QTCORE_LIBRARY} ${QT_QTXML_LIBRARY} )
 
    # "export" this target too so we can use the LOCATION property of the imported target in
-   # FindKDE4Internal.cmake to get the full path to the installed executable instead of using FIND_PROGRAM(), Alex
+   # FindKDE5Internal.cmake to get the full path to the installed executable instead of using FIND_PROGRAM(), Alex
    install(TARGETS kconfig_compiler EXPORT kdelibsToolsTargets ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 

@@ -73,7 +73,7 @@ set(QJS_DATA_INSTALL_DIR    \"${QJS_DATA_INSTALL_DIR}\")
 find_package(ZLIB REQUIRED)
 
 # set some default settings
-include(KDE4Defaults)
+include(KDE5Defaults)
 
 # make some more macros available
 include (MacroLibrary)
@@ -96,7 +96,7 @@ include_directories( ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
 # Use the one variable for the lib you depend upon.
 # E.g. kdeui uses ${QJS_KDECORE_INCLUDES}. Something that depends on kparts uses ${QJS_KPARTS_INCLUDES}.
 
-set(KDE4_KJS_INCLUDES ${CMAKE_SOURCE_DIR}/kjs
+set(KDE5_KJS_INCLUDES ${CMAKE_SOURCE_DIR}/kjs
                       ${CMAKE_BINARY_DIR}/kjs)
 
 
@@ -112,18 +112,18 @@ configure_file(${CMAKE_SOURCE_DIR}/../../config-prefix.h.cmake ${CMAKE_CURRENT_B
 configure_file(${CMAKE_SOURCE_DIR}/../../config-compiler.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-compiler.h )
 configure_file(${CMAKE_SOURCE_DIR}/../../kdemacros.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kdemacros.h )
 
-include(KDE4Macros)
-macro(KDE4_NO_ENABLE_FINAL _project_name)
-   if(KDE4_ENABLE_FINAL)
-        set(KDE4_ENABLE_FINAL OFF)
+include(KDE5Macros)
+macro(KDE5_NO_ENABLE_FINAL _project_name)
+   if(KDE5_ENABLE_FINAL)
+        set(KDE5_ENABLE_FINAL OFF)
         remove_definitions(-DKDE_USE_FINAL)
-        message(STATUS "You used enable-final argument but \"${_project_name}\" doesn't support it. Try to fix compile it and remove KDE4_NO_ENABLE_FINAL macro. Thanks")
+        message(STATUS "You used enable-final argument but \"${_project_name}\" doesn't support it. Try to fix compile it and remove KDE5_NO_ENABLE_FINAL macro. Thanks")
 
-   endif(KDE4_ENABLE_FINAL)
-endmacro(KDE4_NO_ENABLE_FINAL _project_name)
+   endif(KDE5_ENABLE_FINAL)
+endmacro(KDE5_NO_ENABLE_FINAL _project_name)
 
 if (NOT QTONLY_WEBKIT)
-   include_directories( ${CMAKE_SOURCE_DIR}/../.. ${CMAKE_SOURCE_DIR}/../../wtf ${CMAKE_SOURCE_DIR}/../../kjsembed ${KDE4_KJS_INCLUDES} ${QT_INCLUDES} ${KDEWIN_INCLUDES} )
+   include_directories( ${CMAKE_SOURCE_DIR}/../.. ${CMAKE_SOURCE_DIR}/../../wtf ${CMAKE_SOURCE_DIR}/../../kjsembed ${KDE5_KJS_INCLUDES} ${QT_INCLUDES} ${KDEWIN_INCLUDES} )
 else (NOT QTONLY_WEBKIT)
    include_directories(  ${QTONLY_WEBKIT_DIR}/JavaScriptCore/kjs/  ${QTONLY_WEBKIT_DIR}/JavaScriptCore/ ${CMAKE_SOURCE_DIR}/../../kjsembed ${QT_INCLUDES} ${KDEWIN_INCLUDES} )
 endif (NOT QTONLY_WEBKIT)

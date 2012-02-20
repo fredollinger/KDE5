@@ -57,8 +57,8 @@ set(cmakeFiles CheckCXXSourceCompiles.cmake
                FindGphoto2.cmake
                FindHUNSPELL.cmake
                FindIOKit.cmake
-               FindKDE4Internal.cmake
-               FindKDE4Workspace.cmake
+               FindKDE5Internal.cmake
+               FindKDE5Workspace.cmake
                FindKDevPlatform.cmake
                FindKdcraw.cmake
                FindKdeMultimedia.cmake
@@ -93,7 +93,7 @@ set(cmakeFiles CheckCXXSourceCompiles.cmake
                FindPopplerQt4.cmake
                FindPostgreSQL.cmake
                FindPulseAudio.cmake
-               FindPyKDE4.cmake
+               FindPyKDE5.cmake
                FindPyQt4.cmake
                Qt4Macros.cmake
                Qt4ConfigDependentSettings.cmake
@@ -121,8 +121,8 @@ set(cmakeFiles CheckCXXSourceCompiles.cmake
                FindXine.cmake
                FindXmms.cmake
                HandleImportedTargetsInCMakeRequiredLibraries.cmake
-               KDE4Defaults.cmake
-               KDE4Macros.cmake
+               KDE5Defaults.cmake
+               KDE5Macros.cmake
                MacroAddCompileFlags.cmake
                MacroAddLinkFlags.cmake
                MacroAdditionalCleanFiles.cmake
@@ -146,24 +146,24 @@ set(cmakeFiles CheckCXXSourceCompiles.cmake
                check_installed_exports_file.cmake
                config-alsa.h.cmake
                create_exe_symlink.cmake
-               kde4_exec_via_sh.cmake
-               kde4uic.cmake
+               kde5_exec_via_sh.cmake
+               kde5uic.cmake
                cmake-modules-styleguide.txt
-               kde4init_dummy.cpp.in
-               kde4init_win32lib_dummy.cpp.in
-               kde4_cmake_uninstall.cmake.in
-               kde4automoc.files.in
+               kde5init_dummy.cpp.in
+               kde5init_win32lib_dummy.cpp.in
+               kde5_cmake_uninstall.cmake.in
+               kde5automoc.files.in
                BasicFindPackageVersion.cmake.in
                FindLibPython.py
-               FindPyKDE4.py
+               FindPyKDE5.py
                FindPyQt.py
                FindSIP.py
                PythonCompile.py
                )
 
-if (KDE4_ENABLE_UAC_MANIFEST)
+if (KDE5_ENABLE_UAC_MANIFEST)
    set(cmakeFiles ${cmakeFiles} Win32.Manifest.in )
-endif (KDE4_ENABLE_UAC_MANIFEST)
+endif (KDE5_ENABLE_UAC_MANIFEST)
 
 install(FILES ${cmakeFiles}
         DESTINATION ${module_install_dir} )

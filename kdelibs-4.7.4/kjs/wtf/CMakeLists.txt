@@ -1,11 +1,11 @@
 
 ########### next target ###############
 #add_definitions(-DBUILDING_KDE__)
-#include_directories( ${_KDE4_PLATFORM_INCLUDE_DIRS} )
+#include_directories( ${_KDE5_PLATFORM_INCLUDE_DIRS} )
 
 #set(wtf_LIB_SRCS HashTable.cpp )
 
-#kde4_add_library(wtf SHARED ${wtf_LIB_SRCS})
+#kde5_add_library(wtf SHARED ${wtf_LIB_SRCS})
 
 #set_target_properties(wtf PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 #install(TARGETS wtf ${INSTALL_TARGETS_DEFAULT_ARGS} )
