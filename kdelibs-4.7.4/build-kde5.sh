@@ -7,4 +7,5 @@ export PKG_CONFIG_PATH=../../../kde5/lib/pkgconfig:/usr/lib/x86_64-linux-gnu/pkg
 export SHAREDDESKTOPONTOLOGIES_ROOT_DIR=/host/kde5
 
 mkdir -p build
-cd build && cmake ..
+cd build && cmake .. &>err
+
