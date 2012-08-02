@@ -1,0 +1,8 @@
+QMAKE="/opt/qt5/bin/qmake"
+task :default => [:make]
+
+desc "Build this thing"
+task :make do 
+	sh "#{QMAKE} -makefile hello.pro && make"
+end
+

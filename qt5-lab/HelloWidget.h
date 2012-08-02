@@ -1,4 +1,4 @@
-#include <QLabel>
+#include <QtWidgets/QLabel>
 #include <QString>
  
 class HelloWidget : public QLabel {

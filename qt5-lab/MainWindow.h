@@ -1,5 +1,5 @@
-#include <QtGui/QMainWindow>
-#include <QPushButton>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
 #include "HelloWidget.h"
  
 class MainWindow : public QMainWindow {

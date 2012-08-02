@@ -1,5 +1,5 @@
 #include "MainWindow.h"
-#include <QVBoxLayout>
+#include <QtWidgets/QVBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent) {
  // Making a central Widget for our Window
@@ -18,4 +18,7 @@ MainWindow::MainWindow(QWidget *parent) {
  layout->addWidget(_helloWidget);
  layout->addWidget(_button);
  centralWidget->setLayout(layout);
+}
+
+MainWindow::~MainWindow(){
 }
